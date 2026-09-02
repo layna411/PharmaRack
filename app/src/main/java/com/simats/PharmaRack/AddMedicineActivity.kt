@@ -1,6 +1,8 @@
 package com.simats.PharmaRack
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -8,6 +10,9 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.simats.PharmaRack.models.Medicine
+import com.simats.PharmaRack.utils.FirebaseHelper
+import com.simats.PharmaRack.utils.RackUtils
 
 class AddMedicineActivity : AppCompatActivity() {
     
@@ -25,18 +30,32 @@ class AddMedicineActivity : AppCompatActivity() {
         val etQuantity: EditText = findViewById(R.id.etQuantity)
 
         // Setup Spinner with Racks
-        val racks = mutableListOf<String>()
-        for (i in 0 until 24) {
-            val letter = ('A' + i).toString()
-            racks.add("Rack ${i + 1} ($letter)")
-        }
-        racks.add("Rack 25 (Y, Z)")
+        val racks = RackUtils.getRacks()
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, racks)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerRack.adapter = adapter
 
         btnBack.setOnClickListener {
+            finish()
+            overridePendingTransition(0, 0)
+        }
+
+        findViewById<View>(R.id.llEmptySlots).setOnClickListener {
+            val intent = Intent(this, EmptySlotsActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+            finish()
+        }
+
+        findViewById<View>(R.id.llManageUsers).setOnClickListener {
+            val intent = Intent(this, ManageUsersActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
+            startActivity(intent)
+            overridePendingTransition(0, 0)
             finish()
         }
 
@@ -51,16 +70,11 @@ class AddMedicineActivity : AppCompatActivity() {
                 val quantity = qtyStr.toIntOrNull() ?: 0
                 
                 // Extract rack number
-                val rackNumberStr = rackName.substringAfter("Rack ").substringBefore(" (").trim()
-                val rackNumber = rackNumberStr.toIntOrNull() ?: 0
+                val rackNumber = RackUtils.getRackNumber(rackName)
 
                 // Validation: Check if medicine starts with correct letter for the rack
-                val allowedLettersStr = rackName.substringAfter("(").substringBefore(")")
-                val allowedLetters = if (allowedLettersStr.contains(",")) {
-                    allowedLettersStr.split(",").map { it.trim() }
-                } else {
-                    listOf(allowedLettersStr.trim())
-                }
+                val allowedLetters = RackUtils.getAllowedLetters(rackName)
+                val allowedLettersStr = allowedLetters.joinToString(", ")
                 
                 val firstLetter = name.take(1).uppercase()
 

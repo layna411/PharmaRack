@@ -1,17 +1,16 @@
-package com.simats.PharmaRack
+package com.simats.PharmaRack.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.simats.PharmaRack.R
 
 class RackAdapter(
-    private var rackList: List<String>,
-    private val onItemClick: (String) -> Unit
+    private val racks: List<String>,
+    private val onRackClick: (String) -> Unit
 ) : RecyclerView.Adapter<RackAdapter.RackViewHolder>() {
-
-    private var filteredList: List<String> = rackList
 
     class RackViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvRackName: TextView = view.findViewById(R.id.tvRackName)
@@ -24,19 +23,10 @@ class RackAdapter(
     }
 
     override fun onBindViewHolder(holder: RackViewHolder, position: Int) {
-        val rackName = filteredList[position]
+        val rackName = racks[position]
         holder.tvRackName.text = rackName
-        holder.itemView.setOnClickListener { onItemClick(rackName) }
+        holder.itemView.setOnClickListener { onRackClick(rackName) }
     }
 
-    override fun getItemCount() = filteredList.size
-
-    fun filter(query: String) {
-        filteredList = if (query.isEmpty()) {
-            rackList
-        } else {
-            rackList.filter { it.contains(query, ignoreCase = true) }
-        }
-        notifyDataSetChanged()
-    }
+    override fun getItemCount() = racks.size
 }

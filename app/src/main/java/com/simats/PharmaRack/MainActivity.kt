@@ -2,6 +2,8 @@ package com.simats.PharmaRack
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -24,6 +26,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.simats.PharmaRack.adapters.MedicineAdapter
+import com.simats.PharmaRack.adapters.RackAdapter
+import com.simats.PharmaRack.models.Medicine
+import com.simats.PharmaRack.utils.FirebaseHelper
+import com.simats.PharmaRack.utils.RackUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         val llAddMedicine: LinearLayout = findViewById(R.id.llAddMedicine)
         val llEmptySlots: LinearLayout = findViewById(R.id.llEmptySlots)
         val llManageUsers: LinearLayout = findViewById(R.id.llManageUsers)
-        val bottomNav: LinearLayout = findViewById(R.id.bottomNav)
+        val bottomNav: View = findViewById(R.id.bottomNav)
         val etSearch: EditText = findViewById(R.id.etSearch)
 
         // Get user info from Intent
@@ -74,22 +81,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         llManageUsers.setOnClickListener {
-            val intent = Intent(this, ManageUsersActivity::class.java)
+            val intent = Intent(this, ManageUsersActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         // Setup Racks Adapter
-        val racks = mutableListOf<String>()
-        for (i in 0 until 24) {
-            val letter = ('A' + i).toString()
-            racks.add("Rack ${i + 1} ($letter)")
-        }
-        racks.add("Rack 25 (Y, Z)")
+        val racks = RackUtils.getRacks()
 
         rackAdapter = RackAdapter(racks) { rackName ->
             openRackDetails(rackName)
         }
-        rvRacks.layoutManager = GridLayoutManager(this, 5)
+        val screenWidthDp = resources.configuration.screenWidthDp
+        val spanCount = if (screenWidthDp >= 500) 4 else 3
+        rvRacks.layoutManager = GridLayoutManager(this, spanCount)
         rvRacks.adapter = rackAdapter
 
         // Setup Search Results Adapter
@@ -122,20 +129,30 @@ class MainActivity : AppCompatActivity() {
         })
 
         ivLogout.setOnClickListener {
+            getSharedPreferences("PharmaRackPrefs", MODE_PRIVATE).edit().clear().apply()
             auth.signOut()
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
             startActivity(intent)
+            overridePendingTransition(0, 0)
             finish()
         }
 
         llAddMedicine.setOnClickListener {
-            val intent = Intent(this, AddMedicineActivity::class.java)
+            val intent = Intent(this, AddMedicineActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         llEmptySlots.setOnClickListener {
-            val intent = Intent(this, EmptySlotsActivity::class.java)
+            val intent = Intent(this, EmptySlotsActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 
@@ -180,10 +197,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun triggerHardwareSignal(rackName: String) {
-        val rackNumberStr = rackName.substringAfter("Rack ").substringBefore(" (").trim()
-        val rackNumber = rackNumberStr.toIntOrNull()
+        val rackNumber = RackUtils.getRackNumber(rackName)
 
-        if (rackNumber != null) {
+        if (rackNumber != 0) {
             firebaseHelper.sendRackSignal(rackNumber)
             Toast.makeText(this, "Signal sent to $rackName", Toast.LENGTH_SHORT).show()
         }
@@ -192,6 +208,7 @@ class MainActivity : AppCompatActivity() {
     private fun showPickDialog(medicine: Medicine) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_pick_tablet)
         dialog.setCancelable(true)
 
@@ -245,6 +262,7 @@ class MainActivity : AppCompatActivity() {
     private fun showEditDialog(medicine: Medicine) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_edit_medicine)
         dialog.setCancelable(true)
 

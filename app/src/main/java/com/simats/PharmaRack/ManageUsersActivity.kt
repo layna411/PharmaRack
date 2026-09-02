@@ -1,9 +1,11 @@
 package com.simats.PharmaRack
 
 import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -24,6 +26,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.simats.PharmaRack.adapters.UserAdapter
+import com.simats.PharmaRack.models.User
 
 class ManageUsersActivity : AppCompatActivity() {
 
@@ -38,6 +42,25 @@ class ManageUsersActivity : AppCompatActivity() {
         setContentView(R.layout.activity_manage_users)
 
         findViewById<ImageView>(R.id.btnBack).setOnClickListener {
+            finish()
+            overridePendingTransition(0, 0)
+        }
+
+        findViewById<View>(R.id.llAddMedicine).setOnClickListener {
+            val intent = Intent(this, AddMedicineActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+            finish()
+        }
+
+        findViewById<View>(R.id.llEmptySlots).setOnClickListener {
+            val intent = Intent(this, EmptySlotsActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
+            startActivity(intent)
+            overridePendingTransition(0, 0)
             finish()
         }
 
@@ -91,6 +114,7 @@ class ManageUsersActivity : AppCompatActivity() {
     private fun showCreateUserDialog() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_create_user)
         dialog.setCancelable(true)
 
@@ -181,33 +205,5 @@ class ManageUsersActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
-    }
-
-    class UserAdapter(
-        private val users: List<User>,
-        private val onDeleteClick: (User) -> Unit
-    ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-
-        class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val tvName: TextView = view.findViewById(R.id.tvItemUserName)
-            val tvEmail: TextView = view.findViewById(R.id.tvItemUserEmail)
-            val tvRole: TextView = view.findViewById(R.id.tvItemUserRole)
-            val btnDelete: ImageView = view.findViewById(R.id.btnDeleteUser)
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
-            return UserViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-            val user = users[position]
-            holder.tvName.text = user.name
-            holder.tvEmail.text = user.email
-            holder.tvRole.text = user.role.replaceFirstChar { it.uppercase() }
-            holder.btnDelete.setOnClickListener { onDeleteClick(user) }
-        }
-
-        override fun getItemCount() = users.size
     }
 }

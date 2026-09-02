@@ -1,10 +1,12 @@
-package com.simats.PharmaRack
+package com.simats.PharmaRack.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.simats.PharmaRack.R
+import com.simats.PharmaRack.models.Medicine
 
 class MedicineAdapter(
     private var medicineList: List<Medicine>,

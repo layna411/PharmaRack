@@ -2,6 +2,7 @@ package com.simats.PharmaRack
 
 import android.content.Context
 import android.net.Uri
+import com.simats.PharmaRack.models.Medicine
 
 /**
  * Excel import functionality has been removed.

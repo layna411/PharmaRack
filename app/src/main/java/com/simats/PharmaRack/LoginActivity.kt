@@ -16,14 +16,32 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
 
         // Check if user is already logged in
         if (auth.currentUser != null) {
-            fetchUserAndNavigate(auth.currentUser?.uid ?: "")
+            val prefs = getSharedPreferences("PharmaRackPrefs", MODE_PRIVATE)
+            val cachedName = prefs.getString("USER_NAME", null)
+            val cachedRole = prefs.getString("USER_ROLE", null)
+
+            if (cachedName != null && cachedRole != null) {
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("USER_NAME", cachedName)
+                    putExtra("USER_ROLE", cachedRole)
+                    addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                }
+                startActivity(intent)
+                overridePendingTransition(0, 0)
+                finish()
+                return
+            } else {
+                fetchUserAndNavigate(auth.currentUser?.uid ?: "")
+                return
+            }
         }
+
+        setContentView(R.layout.activity_login)
 
         val etEmail: EditText = findViewById(R.id.etEmail)
         val etPassword: EditText = findViewById(R.id.etPassword)
@@ -54,8 +72,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         tvGoToSignUp.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 
@@ -65,16 +86,27 @@ class LoginActivity : AppCompatActivity() {
                 val name = snapshot.child("name").value?.toString() ?: "User"
                 val role = snapshot.child("role").value?.toString() ?: "worker"
 
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("USER_NAME", name)
-                intent.putExtra("USER_ROLE", role)
+                getSharedPreferences("PharmaRackPrefs", MODE_PRIVATE).edit()
+                    .putString("USER_NAME", name)
+                    .putString("USER_ROLE", role)
+                    .apply()
+
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("USER_NAME", name)
+                    putExtra("USER_ROLE", role)
+                    addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                }
                 startActivity(intent)
+                overridePendingTransition(0, 0)
                 finish()
             }.addOnFailureListener {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("USER_NAME", "User")
-                intent.putExtra("USER_ROLE", "worker")
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("USER_NAME", "User")
+                    putExtra("USER_ROLE", "worker")
+                    addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                }
                 startActivity(intent)
+                overridePendingTransition(0, 0)
                 finish()
             }
     }

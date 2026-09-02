@@ -2,8 +2,9 @@ package com.simats.PharmaRack
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -20,6 +21,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.simats.PharmaRack.adapters.MedicineAdapter
+import com.simats.PharmaRack.models.Medicine
+import com.simats.PharmaRack.utils.FirebaseHelper
 
 class RackDetailsActivity : AppCompatActivity() {
     
@@ -103,6 +107,7 @@ class RackDetailsActivity : AppCompatActivity() {
     private fun showPickDialog(medicine: Medicine) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_pick_tablet)
         dialog.setCancelable(true)
 
@@ -164,6 +169,7 @@ class RackDetailsActivity : AppCompatActivity() {
     private fun showEditDialog(medicine: Medicine) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_edit_medicine)
         dialog.setCancelable(true)
 
@@ -221,33 +227,5 @@ class RackDetailsActivity : AppCompatActivity() {
 
         dialog.show()
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-    }
-
-    class MedicineAdapter(
-        private val medicines: List<Medicine>,
-        private val onClick: (Medicine) -> Unit
-    ) : RecyclerView.Adapter<MedicineAdapter.ViewHolder>() {
-
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val tvName: TextView = view.findViewById(R.id.tvMedicineName)
-            val tvSlot: TextView = view.findViewById(R.id.tvSlotInfo)
-            val tvQty: TextView = view.findViewById(R.id.tvQuantity)
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_medicine, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val med = medicines[position]
-            holder.tvName.text = med.name
-            holder.tvSlot.text = "Slot: ${med.getSlotDisplay()}"
-            holder.tvQty.text = "Qty: ${med.quantity}"
-            holder.itemView.setOnClickListener { onClick(med) }
-        }
-
-        override fun getItemCount() = medicines.size
     }
 }

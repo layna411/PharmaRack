@@ -1,8 +1,10 @@
 package com.simats.PharmaRack
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -18,6 +20,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.simats.PharmaRack.adapters.LowStockAdapter
+import com.simats.PharmaRack.models.Medicine
 
 class EmptySlotsActivity : AppCompatActivity() {
     
@@ -31,9 +35,28 @@ class EmptySlotsActivity : AppCompatActivity() {
 
         findViewById<ImageView>(R.id.btnBack).setOnClickListener {
             finish()
+            overridePendingTransition(0, 0)
         }
 
         findViewById<TextView>(R.id.tvTitle).text = "Low Stock Medicines"
+
+        findViewById<View>(R.id.llAddMedicine).setOnClickListener {
+            val intent = Intent(this, AddMedicineActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+            finish()
+        }
+
+        findViewById<View>(R.id.llManageUsers).setOnClickListener {
+            val intent = Intent(this, ManageUsersActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            }
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+            finish()
+        }
 
         rvEmptySlots = findViewById(R.id.rvEmptySlots)
         rvEmptySlots.layoutManager = LinearLayoutManager(this)
@@ -75,6 +98,7 @@ class EmptySlotsActivity : AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setContentView(R.layout.dialog_fill_slot)
         
         val tvTitle = dialog.findViewById<TextView>(R.id.tvDialogTitle)
@@ -117,33 +141,5 @@ class EmptySlotsActivity : AppCompatActivity() {
 
         dialog.show()
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-    }
-
-    class LowStockAdapter(
-        private val medicines: List<Medicine>,
-        private val onRefillClick: (Medicine) -> Unit
-    ) : RecyclerView.Adapter<LowStockAdapter.ViewHolder>() {
-
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val tvMedicineName: TextView = view.findViewById(R.id.tvSlotName)
-            val tvQtyInfo: TextView = view.findViewById(R.id.tvQtyInfo)
-            val btnRefill: Button = view.findViewById(R.id.btnFill)
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_empty_slot, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val medicine = medicines[position]
-            holder.tvMedicineName.text = "${medicine.name} (${medicine.getRackDisplay()})"
-            holder.tvQtyInfo.text = "Current Qty: ${medicine.quantity}"
-            holder.btnRefill.text = "Refill"
-            holder.btnRefill.setOnClickListener { onRefillClick(medicine) }
-        }
-
-        override fun getItemCount() = medicines.size
     }
 }

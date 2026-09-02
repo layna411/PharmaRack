@@ -24,7 +24,7 @@ fun SignUpScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
-    val primaryGreen = Color(0xFF2E7D32)
+    val primaryBlue = Color(0xFF0066FF)
 
     Column(
         modifier = Modifier
@@ -36,7 +36,7 @@ fun SignUpScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = primaryGreen,
+                    color = primaryBlue,
                     shape = RoundedCornerShape(bottomStart = 32.dp, bottomEnd = 32.dp)
                 )
                 .padding(vertical = 40.dp),
@@ -50,7 +50,7 @@ fun SignUpScreen(
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.Login,
                     contentDescription = null,
-                    tint = primaryGreen,
+                    tint = primaryBlue,
                     modifier = Modifier.padding(16.dp)
                 )
             }
@@ -116,7 +116,7 @@ fun SignUpScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = primaryGreen),
+                colors = ButtonDefaults.buttonColors(containerColor = primaryBlue),
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text(text = "Sign Up", color = Color.White, fontSize = 18.sp)
@@ -131,7 +131,7 @@ fun SignUpScreen(
                 Text(text = "Already have an account? ")
                 Text(
                     text = "Login",
-                    color = primaryGreen,
+                    color = primaryBlue,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.clickable { onNavigateToLogin() }
                 )

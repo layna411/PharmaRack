@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.simats.PharmaRack.models.User
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -54,22 +55,30 @@ class SignUpActivity : AppCompatActivity() {
                         // Registration success, store user details in database
                         val userId = auth.currentUser?.uid
                         if (userId != null) {
-                            val userMap = mapOf(
-                                "name" to name,
-                                "email" to email,
-                                "uid" to userId,
-                                "role" to role
+                            val user = User(
+                                uid = userId,
+                                name = name,
+                                email = email,
+                                role = role
                             )
                             FirebaseDatabase.getInstance().getReference("users")
-                                .child(userId).setValue(userMap)
+                                .child(userId).setValue(user)
                                 .addOnSuccessListener {
-                                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                                    val intent = Intent(this, MainActivity::class.java)
-                                    intent.putExtra("USER_NAME", name)
-                                    intent.putExtra("USER_ROLE", role)
-                                    startActivity(intent)
-                                    finish()
-                                }
+                                     getSharedPreferences("PharmaRackPrefs", MODE_PRIVATE).edit()
+                                         .putString("USER_NAME", name)
+                                         .putString("USER_ROLE", role)
+                                         .apply()
+
+                                     Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
+                                     val intent = Intent(this, MainActivity::class.java).apply {
+                                         putExtra("USER_NAME", name)
+                                         putExtra("USER_ROLE", role)
+                                         addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                     }
+                                     startActivity(intent)
+                                     overridePendingTransition(0, 0)
+                                     finish()
+                                 }
                         }
                     } else {
                         // If sign up fails, display a message to the user.
