@@ -1,15 +1,44 @@
+# Built artifacts
+build/
+.gradle/
+.kotlin/
+bin/
+gen/
+out/
+
+# IDE - Android Studio / IntelliJ
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+captures/
 .externalNativeBuild
 .cxx
+cmake-build-debug/
+
+# Local configuration
 local.properties
+
+# Log files
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Android Specific
+*.keystore
+!debug.keystore
+*.jks
+*.p12
+*.key
+*.mobileprovision
+
+# Google Services (usually kept if not private, but listed here if you want to ignore)
+# google-services.json
+
+# Secrets
+secrets.properties
