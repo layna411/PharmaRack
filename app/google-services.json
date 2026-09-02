@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "732816667454",
+    "project_id": "pharmarack-d1eb7",
+    "storage_bucket": "pharmarack-d1eb7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732816667454:android:b27823ee1f4e3fd114726f",
+        "android_client_info": {
+          "package_name": "com.simats.PharmaRack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAELzCkMl7GyxH4sMkyU5UN2KUkkOTZvbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/bg_dialog_rounded">
+
+    <TextView
+        android:id="@+id/tvCreateUserTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create New User"
+        android:textColor="@color/primary_green"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Full Name"
+        app:boxStrokeColor="@color/primary_green"
+        app:hintTextColor="@color/primary_green">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNewUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Email Address"
+        app:boxStrokeColor="@color/primary_green"
+        app:hintTextColor="@color/primary_green">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNewUserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Password (min 6 chars)"
+        app:boxStrokeColor="@color/primary_green"
+        app:hintTextColor="@color/primary_green"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNewUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Select Role:"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinnerRole"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_input_field"
+        android:paddingHorizontal="12dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancelCreateUser"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textColor="@color/text_gray" />
+
+        <Button
+            android:id="@+id/btnSaveNewUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:backgroundTint="@color/primary_green"
+            android:text="Create User"
+            android:textColor="@color/white"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+
+</LinearLayout>

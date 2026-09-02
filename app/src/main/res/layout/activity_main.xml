@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_light_gray"
+    android:fitsSystemWindows="true">
+
+    <!-- Header Section -->
+    <View
+        android:id="@+id/headerBackground"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/bg_top_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Pharmacy Rack Monitoring"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvUserWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome, User"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/tvAppTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvAppTitle" />
+
+    <LinearLayout
+        android:id="@+id/llHeaderActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/tvUserWelcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvAppTitle">
+
+        <ImageView
+            android:id="@+id/ivManageUsers"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_users"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/ivLogout"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_logout"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <!-- Search Bar -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchCard"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/headerBackground"
+        app:layout_constraintTop_toBottomOf="@id/headerBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_search"
+                app:tint="@color/hint_gray" />
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@android:color/transparent"
+                android:hint="Search Medicine"
+                android:inputType="text"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Racks Grid (Initial State) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRacks"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="16dp"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintTop_toBottomOf="@id/searchCard"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/item_rack"
+        tools:spanCount="5" />
+
+    <!-- Search Results List (Visible only when searching) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearch"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintTop_toBottomOf="@id/searchCard"
+        tools:listitem="@layout/item_medicine" />
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/white"
+        android:elevation="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/llAddMedicine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_add"
+                app:tint="@color/primary_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Add Medicine"
+                android:textColor="@color/primary_green"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEmptySlots"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_slots"
+                app:tint="@color/text_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Empty Slots"
+                android:textColor="@color/text_gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llManageUsers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_users"
+                app:tint="@color/primary_dark_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Users"
+                android:textColor="@color/primary_dark_green"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

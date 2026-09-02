@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Medicine"
+            android:textColor="@color/primary_green"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnDeleteMedicine"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_logout"
+            app:tint="#E53935"
+            android:contentDescription="Delete" />
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Medicine Name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvCurrentQty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Current Quantity: 0"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnMinusOne"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="1"
+            android:hint="Remove Qty">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRemoveQty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnRemoveCustom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#E53935"
+            android:text="Remove"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSaveName"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/primary_green"
+        android:text="SAVE CHANGES"
+        android:textColor="@color/white"
+        app:cornerRadius="8dp" />
+
+</LinearLayout>

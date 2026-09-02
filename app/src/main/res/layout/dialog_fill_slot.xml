@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fill Rack 1 - Slot D2"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Medicine Name"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/etDialogMedicineName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_search_bar"
+            android:hint="Enter medicine name"
+            android:paddingHorizontal="12dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Quantity"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/etDialogQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_search_bar"
+            android:hint="Enter quantity"
+            android:inputType="number"
+            android:paddingHorizontal="12dp"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCancel"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Cancel"
+                android:textColor="@color/primary_green"
+                app:cornerRadius="8dp"
+                app:strokeColor="@color/border_gray" />
+
+            <Button
+                android:id="@+id/btnDialogAdd"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/primary_green"
+                android:text="Add Medicine"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:cornerRadius="8dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
