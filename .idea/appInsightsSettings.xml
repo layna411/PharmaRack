@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.simats.PharmaRack" />
-                  <option name="mobileSdkAppId" value="1:732816667454:android:b27823ee1f4e3fd114726f" />
-                  <option name="projectId" value="pharmarack-d1eb7" />
-                  <option name="projectNumber" value="732816667454" />
+                  <option name="appId" value="com.simats.pharmaRack" />
+                  <option name="mobileSdkAppId" value="1:438675377207:android:d4406cb805497b82cd83b2" />
+                  <option name="projectId" value="smartpharmarack" />
+                  <option name="projectNumber" value="438675377207" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

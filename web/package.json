@@ -1,0 +1,15 @@
+{
+  "name": "pharmarack-web",
+  "version": "3.0.0",
+  "private": true,
+  "description": "PharmaRack Smart Pharmacy Storage & LED Retrieval React Application",
+  "scripts": {
+    "dev": "npx -y serve . -l 3000",
+    "build": "node build.cjs",
+    "preview": "npx -y serve dist -l 4173",
+    "deploy": "npm run build && firebase deploy --only hosting"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2"
+  }
+}

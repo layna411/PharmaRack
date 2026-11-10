@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "438675377207",
+    "firebase_url": "https://smartpharmarack-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "smartpharmarack",
+    "storage_bucket": "smartpharmarack.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438675377207:android:d4406cb805497b82cd83b2",
+        "android_client_info": {
+          "package_name": "com.simats.pharmaRack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2woTELcOFNesVLWtNaqgimq0FlPKvaKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

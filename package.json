@@ -1,0 +1,27 @@
+{
+  "name": "pharmarack-react-web",
+  "version": "3.0.0",
+  "description": "PharmaRack Smart Automated Pharmacy Rack & Medicine Inventory Management System — React 18 Application matching Android Native Architecture",
+  "main": "web/index.html",
+  "scripts": {
+    "start": "npx -y serve web -l 3000",
+    "dev": "npx -y serve web -l 3000",
+    "serve": "npx -y serve web -l 3000",
+    "build": "npm --prefix web run build"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "firebase": "^8.10.1"
+  },
+  "keywords": [
+    "pharmarack",
+    "react",
+    "firebase",
+    "iot",
+    "pharmacy-automation",
+    "smart-rack"
+  ],
+  "author": "PharmaRack Team",
+  "license": "MIT"
+}

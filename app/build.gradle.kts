@@ -6,14 +6,14 @@ plugins {
 }
 
 android {
-    namespace = "com.simats.PharmaRack"
-    compileSdk = 35
+    namespace = "com.simats.pharmaRack"
+    compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.simats.PharmaRack"
+        applicationId = "com.simats.pharmaRack"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 1
+        targetSdk = 36
+        versionCode = 2
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

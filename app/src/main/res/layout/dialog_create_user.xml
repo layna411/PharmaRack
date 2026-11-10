@@ -105,6 +105,37 @@
             android:background="@drawable/bg_input_field"
             android:paddingHorizontal="12dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Assigned LED Color:"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/viewColorPreview"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="10dp" />
+
+            <Spinner
+                android:id="@+id/spinnerUserColor"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_input_field"
+                android:paddingHorizontal="12dp" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,0 +1,1077 @@
+/* ===================================================================
+   PHARMARACK - ANDROID SYSTEM REPLICATION DESIGN SYSTEM
+   Faithfully matching Screenshot 1 (Rack Details) & Screenshot 2 (Edit Medicine)
+   Colors from colors.xml | Typography | Dimensions | Transitions
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  /* Brand Primary Colors (Android colors.xml) */
+  --primary-blue: #0066FF;
+  --primary-navy: #0A2540;
+  --primary-cyan: #00D4B2;
+  --primary-teal: #00B4D8;
+  --accent-light-cyan: #E0F7FA;
+  --accent-ice-blue: #EBF5FF;
+
+  /* Backgrounds & Glass Tokens */
+  --bg-app: #F0F4F8;
+  --bg-card: #FFFFFF;
+  --bg-card-glass: #F4F8FD;
+  --border-card: #D4E4F7;
+  --border-card-focused: #0066FF;
+  --border-gray: #CBD5E1;
+
+  /* Typography Colors */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-gray: #64748B;
+  --hint-gray: #94A3B8;
+  --white: #FFFFFF;
+
+  /* Badges & Status */
+  --badge-admin-bg: #E0F2FE;
+  --badge-admin-text: #0284C7;
+  --badge-worker-bg: #F1F5F9;
+  --badge-worker-text: #475569;
+  --danger-red: #EF4444;
+  --danger-red-bg: #FEF2F2;
+  --success-green: #10B981;
+  --success-green-bg: #ECFDF5;
+
+  /* Elevation Shadows (Android Material Elevation) */
+  --shadow-card: 0 3px 12px rgba(0, 0, 0, 0.06);
+  --shadow-card-elevated: 0 8px 24px rgba(10, 37, 64, 0.10);
+  --shadow-navbar: 0 8px 30px rgba(10, 37, 64, 0.16);
+  --shadow-fab: 0 6px 18px rgba(0, 102, 255, 0.35);
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ===================================================================
+   APP VIEWPORT CONTAINER (Responsive Android Shell)
+   =================================================================== */
+.android-viewport {
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  position: relative;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 900px) {
+  .android-viewport {
+    max-width: 760px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .android-viewport {
+    max-width: 860px;
+  }
+}
+
+/* Screen View Container */
+.screen-view {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  padding-bottom: 96px; /* space for bottom nav */
+  animation: screenFadeIn 0.2s ease-out;
+}
+
+.screen-view.active {
+  display: flex;
+}
+
+@keyframes screenFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================================================================
+   SCREEN TOP BARS (bg_top_bar)
+   =================================================================== */
+.header-main-topbar {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 100%);
+  color: var(--white);
+  padding: 16px 20px 42px 20px;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  box-shadow: var(--shadow-card-elevated);
+}
+
+.main-topbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-and-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-card-thumb {
+  width: 40px;
+  height: 40px;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 2px;
+}
+
+.topbar-app-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.topbar-welcome-subtitle {
+  font-size: 0.82rem;
+  color: #D0E1F9;
+  margin-top: 2px;
+}
+
+.topbar-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-icon-action {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.topbar-icon-action:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* Sub-Activity Top Bar (EXACTLY MATCHING SCREENSHOT 1) */
+.header-sub-topbar {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 100%);
+  color: var(--white);
+  height: 70px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  box-shadow: var(--shadow-card-elevated);
+}
+
+.btn-topbar-back {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.18s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.btn-topbar-back:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.sub-topbar-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  flex: 1;
+  letter-spacing: -0.2px;
+  line-height: 1;
+}
+
+/* ===================================================================
+   FLOATING SEARCH CARD
+   =================================================================== */
+.floating-search-card {
+  margin: -27px 18px 16px 18px;
+  height: 54px;
+  background: var(--bg-card);
+  border-radius: 27px;
+  box-shadow: var(--shadow-card-elevated);
+  border: 1.5px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  z-index: 10;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-search-card:focus-within {
+  border-color: var(--primary-blue);
+  box-shadow: 0 6px 20px rgba(0, 102, 255, 0.16);
+}
+
+.search-card-icon {
+  font-size: 1.15rem;
+  color: var(--primary-blue);
+  margin-right: 10px;
+}
+
+.search-card-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  background: transparent;
+}
+
+.search-card-input::placeholder {
+  color: var(--hint-gray);
+}
+
+.search-clear-cross {
+  background: none;
+  border: none;
+  color: var(--hint-gray);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 4px;
+}
+
+.active-hardware-beacon {
+  margin: 0 18px 12px 18px;
+  background: var(--accent-ice-blue);
+  border: 1.5px solid #BAE6FD;
+  border-radius: 16px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #0369A1;
+}
+
+/* ===================================================================
+   RACKS GRID (3 to 5 Columns)
+   =================================================================== */
+.racks-grid-view {
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 650px) {
+  .racks-grid-view {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 850px) {
+  .racks-grid-view {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.rack-card {
+  background: var(--bg-card);
+  border-radius: 18px;
+  border: 1.5px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  min-height: 68px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.rack-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-blue);
+  box-shadow: 0 6px 18px rgba(0, 102, 255, 0.12);
+}
+
+.rack-card.is-active-light {
+  border-color: var(--primary-cyan);
+  background: #E0F7FA;
+  box-shadow: 0 0 18px rgba(0, 212, 178, 0.45);
+  animation: rackGlow 0.6s infinite alternate;
+}
+
+@keyframes rackGlow {
+  from { border-color: var(--primary-blue); background: #EBF5FF; }
+  to { border-color: var(--primary-cyan); background: #E0F7FA; }
+}
+
+.rack-card-name {
+  color: var(--primary-blue);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.rack-card-count {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+/* ===================================================================
+   MEDICINE ITEM CARD (EXACTLY MATCHING SCREENSHOT 1)
+   =================================================================== */
+.medicines-list-container {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.medicine-item-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 3px 12px rgba(10, 37, 64, 0.05);
+  border: 1.5px solid #D4E4F7;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.medicine-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 102, 255, 0.12);
+  border-color: var(--primary-blue);
+}
+
+.med-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.med-card-slot {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.med-card-qty-badge {
+  background: #E0F2FE;
+  color: #0284C7;
+  border: 1px solid #BAE6FD;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 7px 18px;
+  border-radius: 18px;
+  white-space: nowrap;
+}
+
+.med-card-qty-badge.low {
+  background: var(--danger-red-bg);
+  color: var(--danger-red);
+}
+
+/* Empty State */
+.empty-state-card {
+  text-align: center;
+  padding: 44px 20px;
+  color: var(--text-gray);
+}
+
+.empty-state-card .empty-icon {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.empty-state-card .empty-title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ===================================================================
+   EDIT MEDICINE DIALOG (EXACTLY MATCHING SCREENSHOT 2)
+   =================================================================== */
+.android-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+.android-dialog-card {
+  background: #FFFFFF;
+  width: 92%;
+  max-width: 400px;
+  border-radius: 28px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.22);
+  padding: 26px 24px;
+  border: 1px solid var(--border-card);
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: scaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.93); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dialog-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dialog-title-blue {
+  color: var(--primary-blue);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.dialog-exit-red-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease;
+  flex-shrink: 0;
+}
+
+.dialog-exit-red-icon:hover {
+  background: #FEE2E2;
+}
+
+/* Material Outlined Floating Label Group */
+.md-outlined-group {
+  position: relative;
+  margin-top: 18px;
+  text-align: left;
+}
+
+.md-floating-label {
+  position: absolute;
+  top: -9px;
+  left: 14px;
+  background: #FFFFFF;
+  padding: 0 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-gray);
+  z-index: 2;
+  border-radius: 4px;
+}
+
+.md-outlined-input {
+  width: 100%;
+  height: 52px;
+  border-radius: 14px;
+  border: 1.5px solid #CBD5E1;
+  padding: 0 16px;
+  font-size: 1rem;
+  color: #0F172A;
+  font-family: inherit;
+  outline: none;
+  background: #FFFFFF;
+  transition: border-color 0.2s ease;
+}
+
+.md-outlined-input:focus {
+  border-color: var(--primary-blue);
+}
+
+.md-outlined-group:focus-within .md-floating-label {
+  color: var(--primary-blue);
+}
+
+/* Current Quantity Badge in Dialog (Matches Screenshot 2) */
+.dialog-current-qty-badge {
+  display: inline-block;
+  background: #E0F2FE;
+  color: var(--primary-blue);
+  border: 1px solid #BAE6FD;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 8px 18px;
+  border-radius: 12px;
+  margin-top: 16px;
+}
+
+/* Divider (Matches Screenshot 2) */
+.dialog-separator-line {
+  height: 1px;
+  background: #D4E4F7;
+  margin: 18px 0;
+  border: none;
+}
+
+/* -1 QUANTITY Button (Outlined Blue Pill) */
+.btn-outlined-minus-qty {
+  width: 100%;
+  height: 48px;
+  border-radius: 24px;
+  background: transparent;
+  border: 2px solid var(--primary-blue);
+  color: var(--primary-blue);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-outlined-minus-qty:hover {
+  background: #EBF5FF;
+}
+
+/* Remove Qty Input + REMOVE Red Button */
+.remove-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.remove-qty-input-box {
+  flex: 1;
+  min-width: 0;
+  height: 52px;
+  border-radius: 14px;
+  border: 1.5px solid #CBD5E1;
+  padding: 0 16px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  outline: none;
+  font-family: inherit;
+  background: #FFFFFF;
+  transition: border-color 0.2s ease;
+}
+
+.remove-qty-input-box:focus {
+  border-color: var(--danger-red);
+}
+
+.btn-solid-remove-red {
+  height: 52px;
+  padding: 0 24px;
+  border-radius: 26px;
+  background: var(--danger-red);
+  color: var(--white);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.btn-solid-remove-red:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+/* SAVE CHANGES Full Width Solid Blue Pill */
+.btn-solid-save-blue {
+  width: 100%;
+  height: 54px;
+  border-radius: 27px;
+  background: var(--primary-blue);
+  color: var(--white);
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 102, 255, 0.28);
+  margin-top: 24px;
+  transition: all 0.18s ease;
+}
+
+.btn-solid-save-blue:hover {
+  background: #0052cc;
+  transform: translateY(-1px);
+}
+
+/* ===================================================================
+   EMPTY SLOTS REFILL CARDS (item_empty_slot.xml)
+   =================================================================== */
+.empty-slot-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  border: 1.5px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.empty-slot-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.empty-slot-qty {
+  font-size: 0.82rem;
+  color: var(--danger-red);
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.btn-slot-refill {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 20px;
+  background: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-slot-refill:hover {
+  background: #0052cc;
+}
+
+/* ===================================================================
+   USER MANAGEMENT CARDS (item_user.xml)
+   =================================================================== */
+.user-row-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  border: 1.5px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.user-avatar-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--badge-admin-bg);
+  color: var(--primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-right: 14px;
+}
+
+.user-text-info {
+  flex: 1;
+}
+
+.user-name-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.user-email-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 1px;
+}
+
+.user-role-badge {
+  background: var(--badge-admin-bg);
+  color: var(--primary-blue);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.user-role-badge.worker {
+  background: var(--badge-worker-bg);
+  color: var(--badge-worker-text);
+}
+
+.btn-user-delete-icon {
+  background: none;
+  border: none;
+  color: var(--danger-red);
+  font-size: 1.15rem;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: 10px;
+}
+
+.android-fab {
+  position: fixed;
+  bottom: 88px;
+  right: 20px;
+  height: 52px;
+  padding: 0 22px;
+  border-radius: 28px;
+  background: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  box-shadow: var(--shadow-fab);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  z-index: 90;
+  transition: all 0.2s ease;
+}
+
+.android-fab:hover {
+  background: #0052cc;
+  transform: translateY(-2px);
+}
+
+/* ===================================================================
+   FLOATING BOTTOM NAVIGATION BAR (bottomNav)
+   =================================================================== */
+.android-bottom-nav {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 480px;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  border-radius: 28px;
+  border: 1.5px solid var(--border-card);
+  box-shadow: var(--shadow-navbar);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 4px 8px;
+  z-index: 100;
+}
+
+.bottom-nav-action {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 18px;
+  transition: all 0.2s ease;
+  padding: 2px 0;
+}
+
+.bottom-nav-action:hover,
+.bottom-nav-action.active {
+  color: var(--primary-blue);
+  background: rgba(0, 102, 255, 0.08);
+}
+
+.bottom-nav-action .nav-tab-icon {
+  font-size: 1.25rem;
+  margin-bottom: 2px;
+}
+
+/* Form inputs & General buttons */
+.form-input-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.form-input-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.android-input-field {
+  width: 100%;
+  height: 50px;
+  border-radius: 14px;
+  border: 1.5px solid var(--border-card);
+  background: var(--bg-card-glass);
+  padding: 0 16px;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.android-input-field:focus {
+  border-color: var(--primary-blue);
+  background: var(--white);
+}
+
+.android-select-field {
+  width: 100%;
+  height: 50px;
+  border-radius: 14px;
+  border: 1.5px solid var(--border-card);
+  background: var(--bg-card-glass);
+  padding: 0 16px;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  outline: none;
+}
+
+.android-btn-primary {
+  width: 100%;
+  height: 52px;
+  border-radius: 26px;
+  background: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  font-size: 0.96rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 102, 255, 0.28);
+  transition: all 0.2s ease;
+}
+
+.android-btn-primary:hover {
+  background: #0052cc;
+  transform: translateY(-1px);
+}
+
+.android-btn-secondary {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 24px;
+  background: transparent;
+  border: 1.5px solid var(--border-card);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.android-btn-danger {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 24px;
+  background: var(--danger-red);
+  color: var(--white);
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Authentication Screen */
+.auth-screen-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-app);
+}
+
+.auth-header-curved {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 100%);
+  padding: 42px 24px 50px 24px;
+  text-align: center;
+  color: var(--white);
+  border-bottom-left-radius: 36px;
+  border-bottom-right-radius: 36px;
+  box-shadow: var(--shadow-card-elevated);
+}
+
+.auth-logo-white-card {
+  width: 64px;
+  height: 64px;
+  background: var(--white);
+  border-radius: 16px;
+  margin: 0 auto 14px auto;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.auth-logo-white-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.auth-header-curved h1 {
+  font-size: 1.65rem;
+  font-weight: 800;
+}
+
+.auth-header-curved p {
+  font-size: 0.88rem;
+  color: #D0E1F9;
+  margin-top: 4px;
+}
+
+.auth-card-body {
+  margin: -30px 20px 30px 20px;
+  background: var(--bg-card);
+  border-radius: 26px;
+  padding: 28px 22px;
+  box-shadow: var(--shadow-card-elevated);
+  border: 1.5px solid var(--border-card);
+}
+
+.auth-toggle-bar {
+  display: flex;
+  background: var(--bg-app);
+  border-radius: 20px;
+  padding: 4px;
+  margin-bottom: 22px;
+  border: 1px solid var(--border-card);
+}
+
+.auth-toggle-option {
+  flex: 1;
+  height: 38px;
+  border-radius: 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.auth-toggle-option.active {
+  background: var(--white);
+  color: var(--primary-blue);
+  box-shadow: var(--shadow-card);
+}
+
+/* Toast Container */
+.toast-container-shelf {
+  position: fixed;
+  bottom: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2000;
+  pointer-events: none;
+  align-items: center;
+}
+
+.android-toast-bubble {
+  background: rgba(15, 23, 42, 0.94);
+  color: var(--white);
+  padding: 10px 22px;
+  border-radius: 24px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-card-elevated);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+  animation: toastSlide 0.2s ease;
+}
+
+@keyframes toastSlide {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
